@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manage Category</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <style>
+        .inpContainer{
+            display: flex;
+            width: 90%;
+            padding: 20px;
+        }
+        #categoryList{
+            width: 90%;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+      
+
+        #categoryInput {
+            padding: 8px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            margin-right: 10px;
+        }
+
+        #addCategoryBtn {
+            padding: 8px 16px;
+            font-size: 16px;
+            color: #fff;
+            background-color: #28a745;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        #addCategoryBtn:hover {
+            background-color: #218838;
+        }
+
+        #categories, #products {
+            list-style: none;
+            padding: 0;
+        }
+
+        #categories li, #products li {
+            padding: 10px;
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            margin-bottom: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        #categories li button {
+            padding: 6px 12px;
+            font-size: 14px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-left: 5px;
+        }
+
+        .editBtn {
+            background-color: #007bff;
+            color: #fff;
+        }
+
+        .editBtn:hover {
+            background-color: #0056b3;
+        }
+
+        .deleteBtn {
+            background-color: #dc3545;
+            color: #fff;
+        }
+
+        .deleteBtn:hover {
+            background-color: #c82333;
+        }
+
+        .editCategoryInput {
+            display: none;
+            padding: 8px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            margin-right: 10px;
+        }
+
+        .saveBtn {
+            padding: 6px 12px;
+            font-size: 14px;
+            color: #fff;
+            background-color: #28a745;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            display: none;
+        }
+
+        .saveBtn:hover {
+            background-color: #218838;
+        }
+        .adminNav{
+            width: 90%;
+            display: flex;
+            align-items: center;
+            padding: 20px;
+            justify-content: space-between;
+        }
+        .adminNav a{
+            color: #333;
+        }
+        .adminNav img{
+            width: 100px;
+            border-radius: 6px;
+        }
+    </style>
+</head>
+<body>
+    <div class="adminNav" >
+        <a href="index.html"><img src="images/logoImg.png" alt=""></a>
+        <a href="manageProducts.html">DIY's aanpassen<i class="fas fa-long-arrow-right" ></i> </a>
+    </div>
+    <div class="inpContainer" >
+        <input type="text" id="categoryInput" placeholder="Naam categorie">
+        <button id="addCategoryBtn">Toevoegen</button>
+    </div>
+
+    <div id="categoryList">
+        <h2>Categorieën</h2>
+        <ul id="categories"></ul>
+    </div>
+
+
+
+    <script src="script.js"></script>
+</body>
+</html>
+

@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Favorieten</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        #wishlist-container {
+            width: 1250px ;
+            margin-bottom: 100px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+        table thead {
+            width: 100% !important;
+            background-color: #FF5733;
+            color: white;
+        }
+        table th, table td {
+            padding: 10px;
+            text-align: left;
+        }
+        table tbody tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+        table img {
+            width: 100px;
+            margin-right: 10px;
+        }
+        .remove-button {
+            background-color: red;
+            color: white;
+            border: none;
+            padding: 2px 8px;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+        .wishlist-item {
+            display: flex;
+            align-items: center;
+        }
+        .wishlist-item div a{
+            color:#333;
+        }
+        .wishlist-item div a:hover{
+            text-decoration: underline;
+        }
+        @media screen and (width < 1260px) {
+            #wishlist-container{
+                width: 100%;
+            }
+            #wishlist-container img{
+                width: 80px !important;
+            }
+            
+        }
+
+    </style>
+</head>
+<body>
+    <header class="otherHeader" >
+        <nav>
+            <a href="index.html" class="logo">
+                <img src="images/logoImg.png" alt="Logo">
+            </a>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="category.html">Alle DIY projecten</a></li>
+                <li><a href="decoratie.html">Decoratie</a></li>
+                <li><a href="meubels.html">Meubels</a></li>
+                <li><a href="dieren.html">Dieren</a></li>
+                <li class="account liImg"><a href="account.html">Account</a></li>
+                <li class="liImg"><a href="favorites.html"><img src="images/heart_icon.png" alt=""></a></li>
+            </ul>
+            <div class="nav_icons_here">
+                <a href="favorites.html"><img src="images/heart_icon.png" alt=""></a>
+                <li class="account"><a href="account.html">Account</a></li>
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-times"></i>
+            </div>
+    
+        </nav>
+    </header>
+
+    <main id="wishlist-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>Projecten</th>
+                    <th>Moeilijkheid</th>
+                    <th>Duur</th>
+                </tr>
+            </thead>
+            <tbody>
+               
+            </tbody>
+        </table>
+    </main>
+
+
+    
+<footer>
+    <div class="footer_div">
+        <div class="left_footer">
+            <h3>Download onze app</h3>
+            <p>Download app voor android en ios mobiele telefoon</p>
+            <div>
+                <img src="images/play-store.png" alt="">
+                <img src="images/app-store.png" alt="">
+            </div>
+        </div>
+        <div class="logo_footer">
+            <img src="images/logo.png" alt="">
+            <p>
+                Our Purpose Is To Sustainably Make the pleasure and <br> benefits of upcycling accessible to the many.
+            </p>
+        </div>
+        <div class="links_footer">
+            <h3>Handige links</h3>
+            <ul>
+                <li>Coupons</li>
+                <li>Blog Post</li>
+                <li>Zelf DIY inzenden</li>
+                <li>Nieuwsbrief</li>
+            </ul>               
+        </div>
+        <div class="links_footer">
+            <h3>Volg ons</h3>
+            <ul>
+                <li>FaceBook</li>
+                <li>Twitter</li>
+                <li>Instagram</li>
+                <li>Youtube</li>
+            </ul>
+        </div>
+    </div>
+</footer>
+
+<div class="end">
+    <div class="end_div">
+        <p>Copyright 2024 - DIY Fraai industries</p>
+    </div>
+</div>
+
+
+    <script src="somejs.js" defer></script>
+    <script src="app.js" defer></script>
+    <script>
+       document.addEventListener('DOMContentLoaded', () => {
+    const userId = localStorage.getItem('userId');
+    const wishlistContainer = document.getElementById('wishlist-container').querySelector('tbody');
+
+    if (!userId) {
+        wishlistContainer.innerHTML = '<tr><td colspan="3">Meld je aan om favorieten te bekijken</td></tr>';
+        return; // Exit if no userId is found
+    }
+
+    // Fetch wishlist items
+    fetch(`http://localhost:7777/api/wishlist/${userId}`)
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`Network response was not ok: ${response.statusText}`);
+            }
+            return response.json();
+        })
+        .then(data => {
+            if (!Array.isArray(data)) {
+                throw new TypeError('Expected an array');
+            }
+            if (data.length === 0) {
+                wishlistContainer.innerHTML = '<tr><td colspan="3">Geen DIY projecten in je favorietenlijst</td></tr>';
+                return;
+            }
+
+            const html = data.map(item => 
+                `<tr data-id="${item._id}">
+                    <td>
+                        <div class="wishlist-item">
+                            <a href='productDetails.html?id=${item._id}'>
+                                <img src="http://localhost:7777/${item.mainPicture}" alt="${item.name}">
+                                <div>
+                                    <a href='productDetails.html?id=${item._id}'>${item.name}</a>
+                                    <p>Prijs: €${item.kosten}</p>
+                                    <button class="remove-button">Verwijder</button>
+                                </div>
+                            </a>
+                        </div>
+                    </td>
+                    <td>${item.moeilijkheid == 1 ? "Gemakkelijk" : item.moeilijkheid == 2 ? 'Gemiddeld' : 'Moeilijk'}</td>
+                    <td>${item.duur} uur</td>
+                </tr>`
+            ).join('');
+            wishlistContainer.innerHTML = html;
+        })
+        .catch(error => {
+            wishlistContainer.innerHTML = '<tr><td colspan="3">Fout bij het ophalen van gegevens</td></tr>';
+            console.error('Error fetching wishlist data:', error);
+        });
+
+    // Handle item removal
+    wishlistContainer.addEventListener('click', (event) => {
+        if (event.target.classList.contains('remove-button')) {
+            const wishlistItem = event.target.closest('tr');
+            const productId = wishlistItem.getAttribute('data-id');
+
+            fetch(`http://localhost:7777/api/wishlist/${userId}/${productId}`, {
+                method: 'DELETE',
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error(`Network response was not ok: ${response.statusText}`);
+                }
+                return response.json();
+            })
+            .then(result => {
+                if (result.success) {
+                    wishlistItem.remove();
+                } else {
+                    console.error('Failed to remove item from wishlist', result);
+                }
+            })
+            .catch(error => {
+                console.error('Error removing item from wishlist:', error);
+            });
+        }
+    });
+});
+
+    </script>
+</body>
+</html>

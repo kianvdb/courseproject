@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alle DIY's</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        .pagination {
+            display: flex;
+            justify-content: center;
+            margin: 20px 0;
+        }
+
+        .pagination button {
+            padding: 10px 15px;
+            margin: 0 5px;
+            border: 2px solid #ff523b;
+            border-radius: 4px;
+            cursor: pointer;
+            background-color: #fff;
+            color: #ff523b;
+        }
+
+        .pagination button.active {
+            background-color: #ff523b;
+            color: #fff;
+        }
+
+        .pagination button:hover {
+            background-color: #ff523b;
+            color: #fff;
+        }
+
+        .pagination button.disabled {
+            border: 2px solid #e9ecef;
+            background-color: #e9ecef;
+            color: #6c757d;
+            cursor: not-allowed;
+        }
+
+        #productContainer{
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+        }
+
+        .product_item {
+            width: 235px;
+            margin: 10px;
+            padding: 15px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            cursor: pointer;
+        }
+        .product_item:hover{
+            transform: translateY(-5px);
+            transition: transform .5s ;
+        }
+
+        .product_item p {
+            color: #555;
+        }
+
+        .product_item img {
+            width: 235px;
+            height: 120px;
+            object-fit: contain;
+            display: block;            
+        }
+
+        .additional-pictures img {
+            width: 235%;
+            height: auto;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            margin-right: 10px;
+        }
+
+        .top_category{
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .top_category select{
+            padding: 4px;
+            cursor: pointer;
+        }
+        .stars {
+            display: flex;
+        }
+        .stars i {
+            color: #ff523b;
+            margin-right: 4px;
+        }
+        .stars i.inactive {
+            color: #ddd;
+        }
+        @media (max-width: 768px) {
+            .pagination button {
+                padding: 12px;
+                font-size: 18px;
+            }
+
+            .product_item img,
+            .additional-pictures img {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+<header class="otherHeader">
+    <nav>
+        <a href="index.html" class="logo">
+            <img src="images/logoImg.png" alt="">
+        </a>
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="category.html">Alle DIY projecten</a></li>
+            <li><a href="decoratie.html">Decoratie</a></li>
+            <li><a href="meubels.html">Meubels</a></li>
+            <li><a href="dieren.html">Dieren</a></li>
+            <li class="account liImg"><a href="account.html">Account</a></li>
+            <li class="liImg"><a href="favorites.html"><img src="images/heart_icon.png" alt=""></a></li>
+        </ul>
+
+        <div class="nav_icons_here">
+            <a href="#"><img src="images/heart_icon.png" alt=""></a>
+            <li class="account"><a href="account.html">Account</a></li>
+            <i class="fas fa-bars"></i>
+            <i class="fas fa-times"></i>
+        </div>
+    </nav>
+</header>
+
+<div class="categories_container">
+    <div class="top_category">
+        <h2>Alle DIY's</h2>
+        <select id="categorySelect">
+            <option value="all">Sorteren</option>
+            <option value="moeilijkheid">Moeilijkheid</option>
+            <option value="kosten">Kosten</option>
+            <option value="duurtijd">Duurtijd</option>
+        </select>
+    </div>
+    <div id="productContainer"></div>
+    <div class="pagination" id="paginationControls"></div>
+</div>
+
+<footer>
+    <div class="footer_div">
+        <div class="left_footer">
+            <h3>Download onze app</h3>
+            <p>Download app voor android and ios mobiele telefoon</p>
+            <div>
+                <img src="images/play-store.png" alt="">
+                <img src="images/app-store.png" alt="">
+            </div>
+        </div>
+        <div class="logo_footer">
+            <img src="images/logo.png" alt="">
+            <p>
+                Our Purpose Is To Sustainably Make the pleasure and <br> benefits of upcycling accessible to the many.
+            </p>
+        </div>
+        <div class="links_footer">
+            <h3>Handige links</h3>
+            <ul>
+                <li>Coupons</li>
+                <li>Blog Post</li>
+                <li>Zelf DIY inzenden</li>
+                <li>Nieuwsbrief</li>
+            </ul>               
+        </div>
+        <div class="links_footer">
+            <h3>Volg ons</h3>
+            <ul>
+                <li>FaceBook</li>
+                <li>Twitter</li>
+                <li>Instagram</li>
+                <li>Youtube</li>
+            </ul>
+        </div>
+    </div>
+</footer>
+
+<div class="end">
+    <div class="end_div">
+        <p>Copyright 2024 - DIY Fraai industries</p>
+    </div>
+</div>
+
+
+<script src="somejs.js" defer></script>
+<script src="app.js" defer></script>
+
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    const productContainer = document.getElementById('productContainer');
+    const paginationControls = document.getElementById('paginationControls');
+    const categorySelect = document.getElementById('categorySelect');
+    const itemsPerPage = 12;
+    let currentPage = 1;
+    let totalPages = 1;
+    let allProducts = [];
+
+    async function fetchProducts() {
+        try {
+            const response = await fetch('http://localhost:7777/api/products');
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            allProducts = await response.json();
+            console.log('Fetched products:', allProducts); 
+            renderProducts();
+            renderPagination();
+        } catch (error) {
+            console.error('Error fetching products:', error);
+        }
+    }
+
+    function renderStars(ranking) {
+        let stars = '';
+        for (let i = 1; i <= 5; i++) {
+            stars += `<i class="fa-star ${i <= ranking ? 'fas' : 'far'}"></i>`;
+        }
+        return stars;
+    }
+
+    function sortProducts(products, criterion) {
+        console.log('Sorting by:', criterion);
+        switch(criterion) {
+            case 'moeilijkheid':
+                return products.sort((a, b) => a.moeilijkheid - b.moeilijkheid);
+            case 'kosten':
+                return products.sort((a, b) => a.kosten - b.kosten);
+            case 'duurtijd':
+                return products.sort((a, b) => a.duur - b.duur);
+            default:
+                return products;
+        }
+    }
+
+    function renderProducts() {
+        const selectedCriterion = categorySelect.value;
+        console.log('Selected criterion:', selectedCriterion);
+        const sortedProducts = sortProducts([...allProducts], selectedCriterion);
+        console.log('Sorted products:', sortedProducts);
+        totalPages = Math.ceil(sortedProducts.length / itemsPerPage);
+        
+        const startIndex = (currentPage - 1) * itemsPerPage;
+        const endIndex = Math.min(startIndex + itemsPerPage, sortedProducts.length);
+        const productsToShow = sortedProducts.slice(startIndex, endIndex);
+
+        productContainer.innerHTML = productsToShow.map(product => {
+            const categoryName = product.category ? product.category.categoryName : 'No Category';
+            return `
+                <div class="product_item" onclick="openProductDetails('${product._id}')">
+                    <img src="http://localhost:7777/${product.mainPicture}" alt="Main Picture">
+                    <p>${product.name}</p>
+                    <div class="stars">${renderStars(product.ranking)}</div>
+                    <p>${categoryName}</p>
+                </div>
+            `;
+        }).join('');
+    }
+
+    function renderPagination() {
+        paginationControls.innerHTML = `
+            <button class="${currentPage === 1 ? 'disabled' : ''}" onclick="changePage(${currentPage - 1})"><i class="fa-solid fa-arrow-left"></i></button>
+            ${Array.from({ length: totalPages }, (_, i) => 
+                `<button class="${currentPage === i + 1 ? 'active' : ''}" onclick="changePage(${i + 1})">${i + 1}</button>`
+            ).join('')}
+            <button class="${currentPage === totalPages ? 'disabled' : ''}" onclick="changePage(${currentPage + 1})"><i class="fa-solid fa-arrow-right"></i></button>
+        `;
+    }
+
+    window.changePage = function(pageNumber) {
+        if (pageNumber < 1 || pageNumber > totalPages) return;
+        currentPage = pageNumber;
+        renderProducts();
+        renderPagination();
+    };
+
+    window.openProductDetails = function(productId) {
+        window.location.href = `productDetails.html?id=${productId}`;
+    };
+
+    categorySelect.addEventListener('change', function() {
+        currentPage = 1;
+        renderProducts();
+        renderPagination();
+    });
+
+    fetchProducts();
+});
+</script>
+</body>
+</html>

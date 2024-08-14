@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DIY stappenplan</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+
+
+        .product-details {
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 20px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .product-details img {
+            width: 100%;
+            height: auto;
+            object-fit: contain;
+            padding: 10px;
+        }
+
+        .product-details .info {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .info .info_txt{
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .product-details h2 {
+            font-size: 2rem;
+            margin: 0;
+        }
+
+        .product-details .stars {
+            display: flex;
+        }
+
+        .product-details .stars i {
+            color: #ff523b;
+            margin-right: 4px;
+        }
+
+        .product-details .additional-pictures {
+            display: flex;
+            gap: 10px;
+        }
+
+        .product-details .additional-pictures img {
+            width: 100px;
+            height: auto;
+            margin: 5px;
+            cursor: pointer;
+        }
+
+        .product-details .button {
+            background-color: #ff523b;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        .product-details .button:hover {
+            background-color: #e14e2d;
+        }
+
+        @media (max-width: 768px) {
+            .product-details {
+                display: flex;
+                flex-direction: column;
+                margin: 0px;
+            }
+            .info{
+                display: flex ;
+                flex-direction: column-reverse !important;
+            }
+
+            .product-details img {
+                width: 100%;
+            }
+            .additional-pictures{
+                padding: 20px;
+            }
+
+            .product-details .additional-pictures img {
+                width: calc(25% - 10px);
+
+            }
+        }
+
+
+        .gere_pro {
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 20px;
+        }
+
+        .gere_pro_top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .gere_pro_top h2 {
+            margin: 0;
+            font-size: 1.5rem;
+        }
+
+        .gere_pro_top a {
+            text-decoration: none;
+            color: #ff523b;
+        }
+
+        .related-products {
+            width: 100%;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+        .related-products i {
+            color: #e14e2d;
+        }
+
+
+        .related-products img {
+            width: 235px;
+            height: 120px;
+            object-fit: contain;
+            cursor: pointer;
+        }
+
+        .related-product {
+            width: 235px;
+            margin: 10px;
+            padding: 15px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .stars {
+            color: #e14e2d;
+        }
+
+        @media screen and (width < 570px) {
+            .gere_pro_top h2{
+                font-size: 1rem;
+            }
+            .related-product{
+                width: 100%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+            .related-product img{
+                width: 100%;
+            }
+        }
+
+
+
+    </style>
+</head>
+<body>
+    <header class="otherHeader">
+        <nav>
+            <a href="#" class="logo">
+                <img src="images/logoImg.png" alt="Logo">
+            </a>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="category.html">Alle DIY projecten</a></li>
+                <li><a href="decoratie.html">Decoratie</a></li>
+                <li><a href="meubels.html">Meubels</a></li>
+                <li><a href="dieren.html">Dieren</a></li>
+                <li class="account liImg"><a href="account.html">Account</a></li>
+                <li class="liImg"><a href="favorites.html"><img src="images/heart_icon.png" alt=""></a></li>
+            </ul>
+            <div class="nav_icons_here">
+                <a href="#"><img src="images/heart_icon.png" alt=""></a>
+                <li class="account"><a href="account.html">Account</a></li>
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-times"></i>
+            </div>
+        </nav>
+
+
+
+    </header>
+
+    <div class="product-details" id="productDetails">
+        
+    </div>
+
+    <div class="gere_pro">
+        <div class="gere_pro_top">
+            <h2>Gerelateerde projecten</h2>
+            <a href="category.html" style="text-decoration: underline;">Bekijk meer</a>
+
+        </div>
+        <div class="related-products" id="relatedProducts">
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer_div">
+            <div class="left_footer">
+                <h3>Download onze app</h3>
+                <p>Download app voor Android en iOS mobiele telefoon</p>
+                <div>
+                    <img src="images/play-store.png" alt="">
+                    <img src="images/app-store.png" alt="">
+                </div>
+            </div>
+            <div class="logo_footer">
+                <img src="images/logo.png" alt="">
+                <p>
+                    Our purpose is to sustainably make the pleasure and <br> benefits of upcycling accessible to the many.
+                </p>
+            </div>
+            <div class="links_footer">
+                <h3>Handige links</h3>
+                <ul>
+                    <li>Coupons</li>
+                    <li>Blog Post</li>
+                    <li>Zelf DIY inzenden</li>
+                    <li>Nieuwsbrief</li>
+                </ul>
+            </div>
+            <div class="links_footer">
+                <h3>Volg ons</h3>
+                <ul>
+                    <li>FaceBook</li>
+                    <li>Twitter</li>
+                    <li>Instagram</li>
+                    <li>YouTube</li>
+                </ul>
+            </div>
+        </div>
+    </footer>
+
+    <div class="end">
+        <div class="end_div">
+            <p>Copyright 2024 - DIY Fraai Industries</p>
+        </div>
+    </div>
+
+    <script src="somejs.js" defer></script>
+    <script src="app.js" defer></script>
+
+    <script>
+document.addEventListener("DOMContentLoaded", function() {
+    const productDetailsContainer = document.getElementById('productDetails');
+    const relatedProductsContainer = document.getElementById('relatedProducts');
+    
+    const urlParams = new URLSearchParams(window.location.search);
+    const productId = urlParams.get('id');
+    const userId = localStorage.getItem('userId');
+
+    async function fetchProductDetails() {
+        try {
+            const response = await fetch(`http://localhost:7777/api/products/${productId}`);
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            const product = await response.json();
+            console.log('Product fetched:', product);
+
+            renderProductDetails(product);
+
+            fetchRelatedProducts(product.category ? product.category.categoryName : null);
+
+            checkIfFavorite();
+        } catch (error) {
+            console.error('Error fetching product details:', error);
+        }
+    }
+
+    async function fetchRelatedProducts(categoryName) {
+        if (!categoryName) {
+            console.error('Category name is undefined.');
+            return;
+        }
+        try {
+            const response = await fetch(`http://localhost:7777/api/category/categories/${categoryName}/products?limit=4`);
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            const relatedProducts = await response.json();
+            console.log('Related products fetched:', relatedProducts);
+
+            renderRelatedProducts(relatedProducts);
+        } catch (error) {
+            console.error('Error fetching related products:', error);
+        }
+    }
+
+    function renderStars(ranking) {
+        let stars = '';
+        for (let i = 1; i <= 5; i++) {
+            stars += `<i class="fa-star ${i <= ranking ? 'fas' : 'far'}"></i>`;
+        }
+        return stars;
+    }
+
+    function renderProductDetails(product) {
+        const categoryName = product.category ? product.category.categoryName : 'Geen categorie';
+        productDetailsContainer.innerHTML = `
+            <img src="http://localhost:7777/${product.mainPicture}" alt="Main Picture" id="mainPicture">
+            <div class="info">
+                <div class="info_txt" >
+                <h2>${product.name}</h2>
+                <p>Duur: ${product.duur} uur</p>
+                <p>Kosten: €${product.kosten}</p>
+                <p>Moeilijkheid: ${product.moeilijkheid == 1 ? 'Gemakkelijk' :  product.moeilijkheid == 2 ? 'Gemiddeld' : 'Moeilijk'}</p>
+                <div class="stars">${renderStars(product.ranking)}</div>
+                <button class="button" id="addToFavorites">Aan favorieten toevoegen <i class="fas fa-heart"></i></button>
+                <p>Categorie: ${categoryName}</p>
+                <p>${product.inleid}</p>
+                </div>
+                <div class="additional-pictures">
+                    ${product.additionalPictures.map(pic => `<img src="http://localhost:7777/${pic}" alt="Additional Picture" onclick="swap('${pic}')">`).join('')}
+                </div>
+            </div>
+        `;
+
+        const addToFavoritesButton = document.getElementById('addToFavorites');
+        if (addToFavoritesButton) {
+            addToFavoritesButton.addEventListener('click', async () => {
+                if (!userId) {
+                    alert('Meld je aan om projecten aan je favorieten toe te voegen!');
+                    return;
+                }
+                
+                addToFavoritesButton.disabled = true;
+                addToFavoritesButton.textContent = 'Aan het toevoegen...';
+                
+                try {
+                    const response = await fetch(`http://localhost:7777/api/wishlist/add/${userId}/${productId}`, {
+                        method: 'POST'
+                    });
+                    if (response.ok) {
+                        addToFavoritesButton.textContent = '    Toegevoegd!';
+                        addToFavoritesButton.style.opacity = '.8';
+                        addToFavoritesButton.style.cursor = 'auto';
+                        updateFavoritesButtonState(true);
+                    } else {
+                        throw new Error(`HTTP error! status: ${response.status}`);
+                    }
+                } catch (error) {
+                    console.error('Error adding product to wishlist:', error);
+                    addToFavoritesButton.textContent = 'Probeer opnieuw';
+                    addToFavoritesButton.disabled = false; 
+                }
+            });
+        } else {
+            console.error('Add to Favorites button not found.');
+        }
+    }
+
+    function renderRelatedProducts(products) {
+        relatedProductsContainer.innerHTML = products.map(product => `
+            <div class="related-product">
+                <img src="http://localhost:7777/${product.mainPicture}" alt="Related Product">
+                <p>${product.name}</p>
+                <div class="stars">${renderStars(product.ranking)}</div>
+                <a href='productDetails.html?id=${product._id}'>Bekijken</a>
+            </div>
+        `).join('');
+    }
+
+    window.swap = function(pic) {
+        if (!pic) {
+            console.error('No picture path provided.');
+            return;
+        }
+
+        const imagePath  = encodeURI(pic.split('z').join('/172')); 
+        const newPath = imagePath.split('%5C').join('');
+        const imageUrl = `http://localhost:7777/${newPath}`;
+
+        console.log('Setting image source to:', imageUrl);
+
+        const mainPicture = document.getElementById('mainPicture');
+        if (!mainPicture) {
+            console.error('Main picture element not found.');
+            return;
+        }
+
+        const img = new Image();
+        img.onload = () => {
+            mainPicture.src = imageUrl;
+        };
+        img.onerror = () => {
+            console.error('Failed to load image:', imageUrl);
+        };
+        img.src = imageUrl;
+    };
+
+    async function checkIfFavorite() {
+        if (!userId) {
+            console.error('User ID not found.');
+            return;
+        }
+
+        try {
+            const response = await fetch(`http://localhost:7777/api/wishlist/${userId}`);
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            const wishlist = await response.json();
+            const isFavorite = wishlist.some(item => item._id === productId);
+            
+            updateFavoritesButtonState(isFavorite);
+        } catch (error) {
+            console.error('Error fetching wishlist data:', error);
+        }
+    }
+
+    function updateFavoritesButtonState(isFavorite) {
+        const addToFavoritesButton = document.getElementById('addToFavorites');
+        if (addToFavoritesButton) {
+            if (isFavorite) {
+                addToFavoritesButton.disabled = true;
+                addToFavoritesButton.textContent = 'Toegevoegd!';
+                addToFavoritesButton.style.opacity = '.8';
+                addToFavoritesButton.style.cursor = 'auto';
+            } else {
+                addToFavoritesButton.disabled = false;
+                addToFavoritesButton.style.opacity = '1';
+                addToFavoritesButton.style.cursor = 'pointer';
+            }
+        } else {
+            console.error('Add to Favorites button not found.');
+        }
+    }
+
+    fetchProductDetails();
+});
+
+
+    </script>
+</body>
+</html>
