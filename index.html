@@ -228,105 +228,106 @@
 <script src="somejs.js"></script>
 <script src="app.js" defer></script>
 <script>
-    document.addEventListener("DOMContentLoaded", function() {
-        const productContainer = document.getElementById('productContainer');
-        const paginationControls = document.getElementById('paginationControls');
-        const categorySelect = document.getElementById('categorySelect');
-        const itemsPerPage = 12;
-        let currentPage = 1;
-        let totalPages = 1;
-        let allProducts = [];
-    
-        async function fetchProducts() {
-            try {
-                const response = await fetch('http://localhost:7777/api/products');
-                if (!response.ok) {
-                    throw new Error(`HTTP error! status: ${response.status}`);
-                }
-                allProducts = await response.json();
-                console.log('Fetched products:', allProducts); 
-                renderProducts();
-                renderPagination();
-            } catch (error) {
-                console.error('Error fetching products:', error);
+  document.addEventListener("DOMContentLoaded", function() {
+    const productContainer = document.getElementById('productContainer');
+    const paginationControls = document.getElementById('paginationControls');
+    const categorySelect = document.getElementById('categorySelect');
+    const itemsPerPage = 12;
+    let currentPage = 1;
+    let totalPages = 1;
+    let allProducts = [];
+
+    async function fetchProducts() {
+        try {
+            const response = await fetch('https://courseproject-ylzb.onrender.com/api/products');
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
             }
+            allProducts = await response.json();
+            console.log('Fetched products:', allProducts); 
+            renderProducts();
+            renderPagination();
+        } catch (error) {
+            console.error('Error fetching products:', error);
         }
-    
-        function renderStars(ranking) {
-            let stars = '';
-            for (let i = 1; i <= 5; i++) {
-                stars += `<i class="fa-star ${i <= ranking ? 'fas' : 'far'}"></i>`;
-            }
-            return stars;
+    }
+
+    function renderStars(ranking) {
+        let stars = '';
+        for (let i = 1; i <= 5; i++) {
+            stars += `<i class="fa-star ${i <= ranking ? 'fas' : 'far'}"></i>`;
         }
-    
-        function sortProducts(products, criterion) {
-            console.log('Sorting by:', criterion);
-            switch(criterion) {
-                case 'moeilijkheid':
-                    return products.sort((a, b) => a.moeilijkheid - b.moeilijkheid);
-                case 'kosten':
-                    return products.sort((a, b) => a.kosten - b.kosten);
-                case 'duurtijd':
-                    return products.sort((a, b) => a.duur - b.duur);
-                default:
-                    return products;
-            }
+        return stars;
+    }
+
+    function sortProducts(products, criterion) {
+        console.log('Sorting by:', criterion);
+        switch(criterion) {
+            case 'moeilijkheid':
+                return products.sort((a, b) => a.moeilijkheid - b.moeilijkheid);
+            case 'kosten':
+                return products.sort((a, b) => a.kosten - b.kosten);
+            case 'duurtijd':
+                return products.sort((a, b) => a.duur - b.duur);
+            default:
+                return products;
         }
-    
-        function renderProducts() {
-            const selectedCriterion = categorySelect.value;
-            console.log('Selected criterion:', selectedCriterion);
-            const sortedProducts = sortProducts([...allProducts], selectedCriterion);
-            console.log('Sorted products:', sortedProducts);
-            totalPages = Math.ceil(sortedProducts.length / itemsPerPage);
-            
-            const startIndex = (currentPage - 1) * itemsPerPage;
-            const endIndex = Math.min(startIndex + itemsPerPage, sortedProducts.length);
-            const productsToShow = sortedProducts.slice(startIndex, endIndex);
-    
-            productContainer.innerHTML = productsToShow.map(product => {
-                const categoryName = product.category ? product.category.categoryName : 'No Category';
-                return `
-                    <div class="product_item" onclick="openProductDetails('${product._id}')">
-                        <img src="http://localhost:7777/${product.mainPicture}" alt="Main Picture">
-                        <p>${product.name}</p>
-                        <div class="stars">${renderStars(product.ranking)}</div>
-                        <p>${categoryName}</p>
-                    </div>
-                `;
-            }).join('');
-        }
-    
-        function renderPagination() {
-            paginationControls.innerHTML = `
-                <button class="${currentPage === 1 ? 'disabled' : ''}" onclick="changePage(${currentPage - 1})"><i class="fa-solid fa-arrow-left"></i></button>
-                ${Array.from({ length: totalPages }, (_, i) => 
-                    `<button class="${currentPage === i + 1 ? 'active' : ''}" onclick="changePage(${i + 1})">${i + 1}</button>`
-                ).join('')}
-                <button class="${currentPage === totalPages ? 'disabled' : ''}" onclick="changePage(${currentPage + 1})"><i class="fa-solid fa-arrow-right"></i></button>
+    }
+
+    function renderProducts() {
+        const selectedCriterion = categorySelect.value;
+        console.log('Selected criterion:', selectedCriterion);
+        const sortedProducts = sortProducts([...allProducts], selectedCriterion);
+        console.log('Sorted products:', sortedProducts);
+        totalPages = Math.ceil(sortedProducts.length / itemsPerPage);
+        
+        const startIndex = (currentPage - 1) * itemsPerPage;
+        const endIndex = Math.min(startIndex + itemsPerPage, sortedProducts.length);
+        const productsToShow = sortedProducts.slice(startIndex, endIndex);
+
+        productContainer.innerHTML = productsToShow.map(product => {
+            const categoryName = product.category ? product.category.categoryName : 'No Category';
+            return `
+                <div class="product_item" onclick="openProductDetails('${product._id}')">
+                    <img src="https://courseproject-ylzb.onrender.com/${product.mainPicture}" alt="Main Picture">
+                    <p>${product.name}</p>
+                    <div class="stars">${renderStars(product.ranking)}</div>
+                    <p>${categoryName}</p>
+                </div>
             `;
-        }
-    
-        window.changePage = function(pageNumber) {
-            if (pageNumber < 1 || pageNumber > totalPages) return;
-            currentPage = pageNumber;
-            renderProducts();
-            renderPagination();
-        };
-    
-        window.openProductDetails = function(productId) {
-            window.location.href = `productDetails.html?id=${productId}`;
-        };
-    
-        categorySelect.addEventListener('change', function() {
-            currentPage = 1;
-            renderProducts();
-            renderPagination();
-        });
-    
-        fetchProducts();
+        }).join('');
+    }
+
+    function renderPagination() {
+        paginationControls.innerHTML = `
+            <button class="${currentPage === 1 ? 'disabled' : ''}" onclick="changePage(${currentPage - 1})"><i class="fa-solid fa-arrow-left"></i></button>
+            ${Array.from({ length: totalPages }, (_, i) => 
+                `<button class="${currentPage === i + 1 ? 'active' : ''}" onclick="changePage(${i + 1})">${i + 1}</button>`
+            ).join('')}
+            <button class="${currentPage === totalPages ? 'disabled' : ''}" onclick="changePage(${currentPage + 1})"><i class="fa-solid fa-arrow-right"></i></button>
+        `;
+    }
+
+    window.changePage = function(pageNumber) {
+        if (pageNumber < 1 || pageNumber > totalPages) return;
+        currentPage = pageNumber;
+        renderProducts();
+        renderPagination();
+    };
+
+    window.openProductDetails = function(productId) {
+        window.location.href = `productDetails.html?id=${productId}`;
+    };
+
+    categorySelect.addEventListener('change', function() {
+        currentPage = 1;
+        renderProducts();
+        renderPagination();
     });
+
+    fetchProducts();
+});
+
     </script>
     
 
