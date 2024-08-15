@@ -206,7 +206,7 @@
             wishlistContainer.innerHTML = html;
         })
         .catch(error => {
-            wishlistContainer.innerHTML = '<tr><td colspan="3">Fout bij het ophalen van gegevens</td></tr>';
+            wishlistContainer.innerHTML = '<tr><td colspan="3">Geen DIY projecten in je favorietenlijst</td></tr>';
             console.error('Error fetching wishlist data:', error);
         });
 
