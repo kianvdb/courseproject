@@ -1,4 +1,4 @@
-import bcrypt from 'bcrypt';
+import bcrypt from 'bcryptjs';
 import User from '../model/auth.model.js';
 import { generateTokenandSetCookie } from '../middleware/generateTokenandSetCookie.js';
 
