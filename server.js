@@ -33,12 +33,17 @@ const storage = multer.diskStorage({
 const upload = multer({ storage: storage });
 
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'uploads')));
 app.use(express.json());
 app.use(cors());
 app.use(express.urlencoded({ extended: true }));
 
+// Serve static files from the root directory
+app.use(express.static(__dirname));
+
+// Serve uploads directory
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
+
+// API routes
 app.use('/api/auth', AuthRoute);
 app.use('/api/category', CategoryRoute);
 app.use('/api/products', ProductRoute);
@@ -46,7 +51,7 @@ app.use('/api/wishlist', WishlistRouter);
 
 // Root route to handle GET requests to '/'
 app.get('/', (req, res) => {
-    res.send('Welkom bij de API! gebruik de juiste endpoints');
+    res.sendFile(path.join(__dirname, 'index.html'));
 });
 
 const httpServer = createServer(app);
