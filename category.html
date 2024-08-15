@@ -206,9 +206,12 @@ document.addEventListener("DOMContentLoaded", function() {
     let totalPages = 1;
     let allProducts = [];
 
+    // Production URL of your API
+    const apiURL = 'https://courseproject-ylzb.onrender.com/api/products';
+
     async function fetchProducts() {
         try {
-            const response = await fetch('http://localhost:7777/api/products');
+            const response = await fetch(apiURL);
             if (!response.ok) {
                 throw new Error(`HTTP error! status: ${response.status}`);
             }
@@ -258,7 +261,7 @@ document.addEventListener("DOMContentLoaded", function() {
             const categoryName = product.category ? product.category.categoryName : 'No Category';
             return `
                 <div class="product_item" onclick="openProductDetails('${product._id}')">
-                    <img src="http://localhost:7777/${product.mainPicture}" alt="Main Picture">
+                    <img src="https://courseproject-ylzb.onrender.com/${product.mainPicture}" alt="Main Picture">
                     <p>${product.name}</p>
                     <div class="stars">${renderStars(product.ranking)}</div>
                     <p>${categoryName}</p>
@@ -296,6 +299,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
     fetchProducts();
 });
+
 </script>
 </body>
 </html>

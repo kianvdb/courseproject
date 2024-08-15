@@ -156,7 +156,7 @@
     <script src="somejs.js" defer></script>
     <script src="app.js" defer></script>
     <script>
-       document.addEventListener('DOMContentLoaded', () => {
+      document.addEventListener('DOMContentLoaded', () => {
     const userId = localStorage.getItem('userId');
     const wishlistContainer = document.getElementById('wishlist-container').querySelector('tbody');
 
@@ -165,8 +165,11 @@
         return; // Exit if no userId is found
     }
 
+    // Production URL of your API
+    const apiURL = `https://courseproject-ylzb.onrender.com/api/wishlist/${userId}`;
+
     // Fetch wishlist items
-    fetch(`http://localhost:7777/api/wishlist/${userId}`)
+    fetch(apiURL)
         .then(response => {
             if (!response.ok) {
                 throw new Error(`Network response was not ok: ${response.statusText}`);
@@ -187,7 +190,7 @@
                     <td>
                         <div class="wishlist-item">
                             <a href='productDetails.html?id=${item._id}'>
-                                <img src="http://localhost:7777/${item.mainPicture}" alt="${item.name}">
+                                <img src="https://courseproject-ylzb.onrender.com/${item.mainPicture}" alt="${item.name}">
                                 <div>
                                     <a href='productDetails.html?id=${item._id}'>${item.name}</a>
                                     <p>Prijs: €${item.kosten}</p>
@@ -196,7 +199,7 @@
                             </a>
                         </div>
                     </td>
-                    <td>${item.moeilijkheid == 1 ? "Gemakkelijk" : item.moeilijkheid == 2 ? 'Gemiddeld' : 'Moeilijk'}</td>
+                    <td>${item.moeilijkheid === 1 ? "Gemakkelijk" : item.moeilijkheid === 2 ? 'Gemiddeld' : 'Moeilijk'}</td>
                     <td>${item.duur} uur</td>
                 </tr>`
             ).join('');
@@ -213,7 +216,10 @@
             const wishlistItem = event.target.closest('tr');
             const productId = wishlistItem.getAttribute('data-id');
 
-            fetch(`http://localhost:7777/api/wishlist/${userId}/${productId}`, {
+            // Production URL of your API for removing items
+            const removeURL = `https://courseproject-ylzb.onrender.com/api/wishlist/${userId}/${productId}`;
+
+            fetch(removeURL, {
                 method: 'DELETE',
             })
             .then(response => {
@@ -235,6 +241,7 @@
         }
     });
 });
+
 
     </script>
 </body>

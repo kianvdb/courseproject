@@ -208,7 +208,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
     async function fetchProducts() {
         try {
-            const response = await fetch('http://localhost:7777/api/products');
+            const response = await fetch('https://courseproject-ylzb.onrender.com/api/products');
             if (!response.ok) {
                 throw new Error(`HTTP error! status: ${response.status}`);
             }
@@ -232,7 +232,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
     function sortProducts(products, criterion) {
         console.log('Sorting by:', criterion);
-        switch(criterion) {
+        switch (criterion) {
             case 'moeilijkheid':
                 return products.sort((a, b) => a.moeilijkheid - b.moeilijkheid);
             case 'kosten':
@@ -250,7 +250,7 @@ document.addEventListener("DOMContentLoaded", function() {
         const sortedProducts = sortProducts([...allProducts], selectedCriterion);
         console.log('Sorted products:', sortedProducts);
         totalPages = Math.ceil(sortedProducts.length / itemsPerPage);
-        
+
         const startIndex = (currentPage - 1) * itemsPerPage;
         const endIndex = Math.min(startIndex + itemsPerPage, sortedProducts.length);
         const productsToShow = sortedProducts.slice(startIndex, endIndex);
@@ -259,7 +259,7 @@ document.addEventListener("DOMContentLoaded", function() {
             const categoryName = product.category ? product.category.categoryName : 'No Category';
             return `
                 <div class="product_item" onclick="openProductDetails('${product._id}')">
-                    <img src="http://localhost:7777/${product.mainPicture}" alt="${product.name}"
+                    <img src="https://courseproject-ylzb.onrender.com/${product.mainPicture}" alt="${product.name}">
                     <p>${product.name}</p>
                     <p>${categoryName}</p>
                     <p><span class="stars">${renderStars(product.ranking)}</span></p>
@@ -290,6 +290,7 @@ document.addEventListener("DOMContentLoaded", function() {
 function openProductDetails(productId) {
     window.location.href = `productDetails.html?id=${productId}`;
 }
+
 </script>
 </body>
 </html>

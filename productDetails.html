@@ -274,7 +274,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
     async function fetchProductDetails() {
         try {
-            const response = await fetch(`http://localhost:7777/api/products/${productId}`);
+            const response = await fetch(`https://courseproject-ylzb.onrender.com/api/products/${productId}`);
             if (!response.ok) {
                 throw new Error(`HTTP error! status: ${response.status}`);
             }
@@ -297,7 +297,7 @@ document.addEventListener("DOMContentLoaded", function() {
             return;
         }
         try {
-            const response = await fetch(`http://localhost:7777/api/category/categories/${categoryName}/products?limit=4`);
+            const response = await fetch(`https://courseproject-ylzb.onrender.com/api/category/categories/${categoryName}/products?limit=4`);
             if (!response.ok) {
                 throw new Error(`HTTP error! status: ${response.status}`);
             }
@@ -321,20 +321,20 @@ document.addEventListener("DOMContentLoaded", function() {
     function renderProductDetails(product) {
         const categoryName = product.category ? product.category.categoryName : 'Geen categorie';
         productDetailsContainer.innerHTML = `
-            <img src="http://localhost:7777/${product.mainPicture}" alt="Main Picture" id="mainPicture">
+            <img src="https://courseproject-ylzb.onrender.com/${product.mainPicture}" alt="Main Picture" id="mainPicture">
             <div class="info">
-                <div class="info_txt" >
+                <div class="info_txt">
                 <h2>${product.name}</h2>
                 <p>Duur: ${product.duur} uur</p>
                 <p>Kosten: €${product.kosten}</p>
-                <p>Moeilijkheid: ${product.moeilijkheid == 1 ? 'Gemakkelijk' :  product.moeilijkheid == 2 ? 'Gemiddeld' : 'Moeilijk'}</p>
+                <p>Moeilijkheid: ${product.moeilijkheid == 1 ? 'Gemakkelijk' : product.moeilijkheid == 2 ? 'Gemiddeld' : 'Moeilijk'}</p>
                 <div class="stars">${renderStars(product.ranking)}</div>
                 <button class="button" id="addToFavorites">Aan favorieten toevoegen <i class="fas fa-heart"></i></button>
                 <p>Categorie: ${categoryName}</p>
                 <p>${product.inleid}</p>
                 </div>
                 <div class="additional-pictures">
-                    ${product.additionalPictures.map(pic => `<img src="http://localhost:7777/${pic}" alt="Additional Picture" onclick="swap('${pic}')">`).join('')}
+                    ${product.additionalPictures.map(pic => `<img src="https://courseproject-ylzb.onrender.com/${pic}" alt="Additional Picture" onclick="swap('${pic}')">`).join('')}
                 </div>
             </div>
         `;
@@ -351,11 +351,11 @@ document.addEventListener("DOMContentLoaded", function() {
                 addToFavoritesButton.textContent = 'Aan het toevoegen...';
                 
                 try {
-                    const response = await fetch(`http://localhost:7777/api/wishlist/add/${userId}/${productId}`, {
+                    const response = await fetch(`https://courseproject-ylzb.onrender.com/api/wishlist/add/${userId}/${productId}`, {
                         method: 'POST'
                     });
                     if (response.ok) {
-                        addToFavoritesButton.textContent = '    Toegevoegd!';
+                        addToFavoritesButton.textContent = 'Toegevoegd!';
                         addToFavoritesButton.style.opacity = '.8';
                         addToFavoritesButton.style.cursor = 'auto';
                         updateFavoritesButtonState(true);
@@ -376,7 +376,7 @@ document.addEventListener("DOMContentLoaded", function() {
     function renderRelatedProducts(products) {
         relatedProductsContainer.innerHTML = products.map(product => `
             <div class="related-product">
-                <img src="http://localhost:7777/${product.mainPicture}" alt="Related Product">
+                <img src="https://courseproject-ylzb.onrender.com/${product.mainPicture}" alt="Related Product">
                 <p>${product.name}</p>
                 <div class="stars">${renderStars(product.ranking)}</div>
                 <a href='productDetails.html?id=${product._id}'>Bekijken</a>
@@ -390,9 +390,9 @@ document.addEventListener("DOMContentLoaded", function() {
             return;
         }
 
-        const imagePath  = encodeURI(pic.split('z').join('/172')); 
+        const imagePath = encodeURI(pic.split('z').join('/172')); 
         const newPath = imagePath.split('%5C').join('');
-        const imageUrl = `http://localhost:7777/${newPath}`;
+        const imageUrl = `https://courseproject-ylzb.onrender.com/${newPath}`;
 
         console.log('Setting image source to:', imageUrl);
 
@@ -419,7 +419,7 @@ document.addEventListener("DOMContentLoaded", function() {
         }
 
         try {
-            const response = await fetch(`http://localhost:7777/api/wishlist/${userId}`);
+            const response = await fetch(`https://courseproject-ylzb.onrender.com/api/wishlist/${userId}`);
             if (!response.ok) {
                 throw new Error(`HTTP error! status: ${response.status}`);
             }
@@ -452,6 +452,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
     fetchProductDetails();
 });
+
 
 
     </script>

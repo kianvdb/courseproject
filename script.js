@@ -5,7 +5,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
     async function fetchCategories() {
         try {
-            const response = await fetch('http://localhost:7777/api/category/');
+            const response = await fetch('https://courseproject-ylzb.onrender.com/api/category/');
             if (!response.ok) {
                 throw new Error(`HTTP error! status: ${response.status}`);
             }
@@ -13,9 +13,9 @@ document.addEventListener("DOMContentLoaded", function() {
             categoriesList.innerHTML = categories.map(cat =>
                 `<li data-id="${cat._id}">
                     <span class="categoryName">${cat.categoryName}</span>
-                    <input type="text" class="editCategoryInput" value="${cat.categoryName}">
+                    <input type="text" class="editCategoryInput" value="${cat.categoryName}" style="display: none;">
                     <div>
-                    <button class="saveBtn" onclick="saveCategory('${cat._id}')">Bewaren</button>
+                    <button class="saveBtn" onclick="saveCategory('${cat._id}')" style="display: none;">Bewaren</button>
                     <button class="editBtn" onclick="startEditing('${cat._id}')">Bewerken</button>
                     <button class="deleteBtn" onclick="deleteCategory('${cat._id}')">Verwijderen</button>
                     <div>
@@ -31,7 +31,7 @@ document.addEventListener("DOMContentLoaded", function() {
         if (!categoryName) return;
 
         try {
-            const response = await fetch('http://localhost:7777/api/category/categories', {
+            const response = await fetch('https://courseproject-ylzb.onrender.com/api/category/categories', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -67,7 +67,7 @@ document.addEventListener("DOMContentLoaded", function() {
         if (!newCategoryName) return;
 
         try {
-            const response = await fetch(`http://localhost:7777/api/category/categories/${id}`, {
+            const response = await fetch(`https://courseproject-ylzb.onrender.com/api/category/categories/${id}`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json'
@@ -94,7 +94,7 @@ document.addEventListener("DOMContentLoaded", function() {
         if (!confirm('Ben je zeker dat je deze categorie wil verwijderen?')) return;
 
         try {
-            const response = await fetch(`http://localhost:7777/api/category/categories/${id}`, {
+            const response = await fetch(`https://courseproject-ylzb.onrender.com/api/category/categories/${id}`, {
                 method: 'DELETE'
             });
 
