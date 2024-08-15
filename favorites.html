@@ -165,7 +165,6 @@
         return; // Exit if no userId is found
     }
 
-    // Production URL of your API
     const apiURL = `https://courseproject-ylzb.onrender.com/api/wishlist/${userId}`;
 
     // Fetch wishlist items
@@ -216,7 +215,6 @@
             const wishlistItem = event.target.closest('tr');
             const productId = wishlistItem.getAttribute('data-id');
 
-            // Production URL of your API for removing items
             const removeURL = `https://courseproject-ylzb.onrender.com/api/wishlist/${userId}/${productId}`;
 
             fetch(removeURL, {
@@ -229,6 +227,7 @@
                 return response.json();
             })
             .then(result => {
+                console.log('Remove result:', result); // Debugging output
                 if (result.success) {
                     wishlistItem.remove();
                 } else {

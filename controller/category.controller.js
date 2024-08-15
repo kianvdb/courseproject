@@ -54,14 +54,19 @@ export const deleteCategory = async (req, res) => {
 export const getProductsByCategory = async (req, res) => {
   try {
     const { categoryName } = req.params;
-    const limit = parseInt(req.query.limit, 10) || 4;
+    console.log('Category Name:', categoryName); // Debugging
 
     const category = await Category.findOne({ categoryName: categoryName });
-    if (!category) return res.status(404).json({ message: 'Categorie niet gevonden' });
+    if (!category) {
+      console.log('Category not found'); // Debugging
+      return res.status(404).json({ message: 'Categorie niet gevonden' });
+    }
 
-    const products = await Product.find({ category: category._id }).limit(limit);
+    const products = await Product.find({ category: category._id }).limit(parseInt(req.query.limit, 10) || 4);
+    console.log('Products:', products); // Debugging
     res.status(200).json(products);
   } catch (error) {
+    console.error('Error fetching products by category:', error); // Debugging
     res.status(500).json({ message: error.message });
   }
 };

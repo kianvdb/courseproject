@@ -297,7 +297,7 @@ document.addEventListener("DOMContentLoaded", function() {
             return;
         }
         try {
-            const response = await fetch(`https://courseproject-ylzb.onrender.com/api/category/categories/${categoryName}/products?limit=4`);
+            const response = await fetch(`https://courseproject-ylzb.onrender.com/api/category/${categoryName}/products?limit=4`);
             if (!response.ok) {
                 throw new Error(`HTTP error! status: ${response.status}`);
             }

@@ -57,21 +57,22 @@ export const removeProductFromWishlist = async (req, res) => {
     const { userId, productId } = req.params;
 
     if (!userId || !productId) {
-      return res.status(400).json({ message: 'User ID and Product ID are required' });
+      return res.status(400).json({ success: false, message: 'User ID and Product ID are required' });
     }
 
     const wishlist = await Wishlist.findOne({ userId });
     if (!wishlist) {
-      return res.status(404).json({ message: 'Wishlist not found' });
+      return res.status(404).json({ success: false, message: 'Wishlist not found' });
     }
 
+    // Filter out the product
     wishlist.products = wishlist.products.filter(id => id.toString() !== productId);
     const updatedWishlist = await wishlist.save();
 
-    res.status(200).json(updatedWishlist);
+    res.status(200).json({ success: true, wishlist: updatedWishlist });
   } catch (error) {
     console.error(`Error removing product from wishlist: ${error.message}`);
-    res.status(500).json({ message: `Error removing product from wishlist: ${error.message}` });
+    res.status(500).json({ success: false, message: `Error removing product from wishlist: ${error.message}` });
   }
 };
 
